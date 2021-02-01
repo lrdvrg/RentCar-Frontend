@@ -1,0 +1,98 @@
+@import './../../../../theme/colors';
+
+
+div.wrapper-layout {
+  height: calc(100% - 64px);
+}
+
+mat-toolbar {
+  &.custom-background {
+    background-color: $primary;
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  img.logo-humano-full {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  img.logo-humano-min {
+    width: 89%;
+    max-width: 78px;
+  }
+
+  button {
+    margin-left: 10px;
+
+    mat-icon.menu-icon-custom {
+      width: 30px;
+      height: 30px;
+      font-size: 30px;
+      line-height: 30px;
+      color: white;
+    }
+
+    mat-icon.menu-icon-custom-green {
+      color: #00BBAD !important;
+    }
+  }
+}
+
+mat-sidenav-container {
+  mat-sidenav {
+    border-right: 0;
+
+    ul.sidenav-menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        color: white;
+        display: flex;
+        align-items: center;
+        height: 55px;
+        background: $primary;
+        justify-content: space-between;
+        cursor: pointer;
+        margin-bottom: 2px;
+        padding: 0 15px;
+        font-size: 16px;
+      }
+
+      ul.sub-items-menu {
+        overflow: hidden;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          background: $primary-alternate;
+        }
+      }
+
+      ul.sub-items {
+        overflow: hidden;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          padding: 10px 0 5px 50px;
+          height: 30px;
+        }
+
+        li.min {
+          padding: 10px 22px 5px 10px;
+        }
+      }
+    }
+  }
+
+  mat-sidenav-content {
+    box-shadow: inset 0 13px 14px -18px #7b7b7b;
+  }
+}

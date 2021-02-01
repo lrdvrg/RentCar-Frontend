@@ -1,0 +1,57 @@
+<div class="wrapper-layout">
+  <mat-toolbar color="primary" class="mat-elevation-z5 custom-background">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+      (click)="opened = !opened">
+      <mat-icon [ngClass]="{'menu-icon-custom-green': !opened}" class="menu-icon-custom">menu</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-sidenav-container class="height-100 text-center" style="height: 100%;" autosize>
+    <mat-sidenav mode="side" opened class="background-primary-alternate">
+      <ul class="sidenav-menu">
+        <ng-container *ngFor="let menuItem of menuItems">
+          <!-- Elementos principales del menu -->
+          <li
+            (click)="menuItem.url && menuItem.subItems.length === 0 ? this.router.navigate([menuItem.url]) : menuItem.expanded = !menuItem.expanded">
+            <div class="display-flex align-items-center">
+              <mat-icon class="margin-r-5">{{ menuItem.iconString }}</mat-icon>
+              <span *ngIf="opened" class="text-xl font-weight-b">{{ menuItem.name }}</span>
+            </div>
+            <mat-icon *ngIf="menuItem.subItems && menuItem.subItems.length > 0"
+              [@rotatedState]="menuItem.expanded ? 'rotated' : 'default'">keyboard_arrow_down</mat-icon>
+          </li>
+
+          <!-- Lista de elementos secundarios dentro de los principales -->
+          <ul class="sub-items-menu" *ngIf="menuItem.subItems && menuItem.subItems.length > 0"
+            [@menuItemExpandState]="menuItem.expanded ? 'expanded' : 'collapsed'">
+            <ng-container *ngFor="let subItems of menuItem.subItems">
+              <li
+                (click)="subItems.url && subItems.subItems.length === 0 ? this.router.navigate([subItems.url]) :  subItems.expanded = !subItems.expanded">
+                <div class="display-flex align-items-center">
+                  <mat-icon class="margin-r-5">{{ subItems.iconString }}</mat-icon>
+                  <span *ngIf="opened" class="font-weight-b">{{ subItems.name }}</span>
+                </div>
+                <mat-icon *ngIf="subItems.subItems && subItems.subItems.length > 0"
+                  [@rotatedState]="subItems.expanded ? 'rotated' : 'default'">keyboard_arrow_down</mat-icon>
+              </li>
+
+              <!-- Sub lista de elementos del menu que estan debajo de un elemento secundario -->
+              <ul class="sub-items" *ngIf="subItems.subItems && subItems.subItems.length > 0"
+                [@menuItemExpandState]="subItems.expanded ? 'expanded' : 'collapsed'">
+                <li [ngClass]="{'min': !opened}" *ngFor="let subItem of subItems.subItems"
+                  (click)="subItem.url ? this.router.navigate([subItem.url]) : null">
+                  <div class="display-flex align-items-center">
+                    <span>{{ subItem.name }}</span>
+                  </div>
+                </li>
+              </ul>
+
+            </ng-container>
+          </ul>
+        </ng-container>
+      </ul>
+    </mat-sidenav>
+    <mat-sidenav-content style="background-color: rgb(248, 248, 248);">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
