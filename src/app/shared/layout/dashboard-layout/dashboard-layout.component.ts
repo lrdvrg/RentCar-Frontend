@@ -27,24 +27,94 @@ export class DashboardLayoutComponent implements OnInit {
   menuItems: MenuItems[] = [
     {
       name: 'Gestión',
-      iconString: 'medical_services',
+      iconString: 'article',
       expanded: false,
       subItems: [
         {
-          name: 'Tipos de Vehiculos',
-          iconString: 'library_add_check',
+          name: 'Tipos de Vehículos',
+          iconString: 'assignment',
           expanded: false,
           subItems: [
             { name: 'Crear', url: 'dashboard/managment/vehicles-type/create' },
             { name: 'Consultar', url: 'dashboard/managment/vehicles-type/consult' },
           ]
         },
-
+        {
+          name: 'Marcas',
+          iconString: 'copyright',
+          expanded: false,
+          subItems: [
+            { name: 'Crear', url: 'dashboard/managment/brand/create' },
+            { name: 'Consultar', url: 'dashboard/managment/brand/consult' },
+          ]
+        },
+        {
+          name: 'Modelos',
+          iconString: 'dns',
+          expanded: false,
+          subItems: [
+            { name: 'Crear', url: 'dashboard/managment/models/create' },
+            { name: 'Consultar', url: 'dashboard/managment/models/consult' },
+          ]
+        },
+        {
+          name: 'Tipos de Combustibles',
+          iconString: 'filter_alt',
+          expanded: false,
+          subItems: [
+            { name: 'Crear', url: 'dashboard/managment/fuel-types/create' },
+            { name: 'Consultar', url: 'dashboard/managment/fuel-types/consult' },
+          ]
+        },
+        {
+          name: 'Vehículos',
+          iconString: 'commute',
+          expanded: false,
+          subItems: [
+            { name: 'Crear', url: 'dashboard/managment/vehicles/create' },
+            { name: 'Consultar', url: 'dashboard/managment/vehicles/consult' },
+          ]
+        },
+        {
+          name: 'Clientes',
+          iconString: 'supervisor_account',
+          expanded: false,
+          subItems: [
+            { name: 'Crear', url: 'dashboard/managment/clients/create' },
+            { name: 'Consultar', url: 'dashboard/managment/clients/consult' },
+          ]
+        },
+        {
+          name: 'Empleados',
+          iconString: 'accessibility',
+          expanded: false,
+          subItems: [
+            { name: 'Crear', url: 'dashboard/managment/employees/create' },
+            { name: 'Consultar', url: 'dashboard/managment/employees/consult' },
+          ]
+        },
       ],
     },
     {
-      name: 'Otro',
-      iconString: 'checkroom'
+      name: 'Consultas',
+      iconString: 'inventory',
+      expanded: false,
+      subItems: [
+        {
+          name: 'Consulta',
+          iconString: 'view_agenda',
+          url: 'dashboard/consults/consult',
+          expanded: false,
+          subItems: []
+        },
+        {
+          name: 'Reporte',
+          iconString: 'mark_chat_read',
+          url: 'dashboard/consults/report',
+          expanded: false,
+          subItems: []
+        },
+      ],
     }
   ]
 

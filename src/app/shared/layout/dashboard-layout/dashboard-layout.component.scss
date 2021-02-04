@@ -7,7 +7,7 @@ div.wrapper-layout {
 
 mat-toolbar {
   &.custom-background {
-    background-color: $primary;
+    background-color: white;
   }
 
   .spacer {
@@ -32,11 +32,11 @@ mat-toolbar {
       height: 30px;
       font-size: 30px;
       line-height: 30px;
-      color: white;
+      color: $primary-alternate;
     }
 
     mat-icon.menu-icon-custom-green {
-      color: #00BBAD !important;
+      color: $primary;
     }
   }
 }
@@ -44,6 +44,7 @@ mat-toolbar {
 mat-sidenav-container {
   mat-sidenav {
     border-right: 0;
+    background-color: $primary-alternate;
 
     ul.sidenav-menu {
       list-style: none;
