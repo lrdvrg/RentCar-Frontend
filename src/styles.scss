@@ -51,6 +51,16 @@
   background-color: #d33941 !important;
 }
 
+
+.text-color-red {
+  color: rgb(204, 73, 73) !important;
+}
+
+.text-color-green {
+  color: #74bf7b !important
+}
+
+
 .rentcar-table {
   .mat-header-cell {
     font-size: 14px !important;
@@ -60,7 +70,7 @@
 
   .mat-cell {
     font-size: 15px;
-    color: black !important;
+    color: black;
     font-weight: 400;
   }
 

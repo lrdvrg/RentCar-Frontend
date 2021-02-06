@@ -22,7 +22,9 @@
               {{element[data.definition[i]]}} </td>
           </ng-container>
           <ng-container *ngIf="data.definition[i] === 'status'">
-            <td mat-cell style="width: 120px; max-width: 120px;" *matCellDef="let element">
+            <td mat-cell style="width: 120px; max-width: 120px;"
+              [ngClass]="{'text-color-green': element[data.definition[i]] === 'Activo', 'text-color-red': element[data.definition[i]] === 'Inactivo'}"
+              *matCellDef="let element">
               {{element[data.definition[i]]}} </td>
           </ng-container>
           <ng-container *ngIf="data.definition[i] === 'actions'">

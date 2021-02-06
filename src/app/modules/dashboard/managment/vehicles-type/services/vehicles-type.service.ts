@@ -13,6 +13,6 @@ export class VehiclesTypeService {
   ) { }
 
   getData(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/api/VehicleTypes`);
+    return this.http.get(`${environment.apiUrl}/VehicleTypes`);
   }
 }
