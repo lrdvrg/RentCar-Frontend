@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { VehiclesTypeService } from '../services/vehicles-type.service';
 import { LoaderService } from '../../../../../shared/services/loader.service';
+import { CrudActionsService } from '../../shared/services/crud-actions.service';
 @Component({
   selector: 'app-consult',
   templateUrl: './consult.component.html',
@@ -16,13 +16,13 @@ export class ConsultComponent implements OnInit {
   data = []
 
   constructor(
-    private vehiclesType: VehiclesTypeService,
+    private crudActions: CrudActionsService,
     private loader: LoaderService
   ) { }
 
   ngOnInit(): void {
     this.loader.start();
-    this.vehiclesType.getData()
+    this.crudActions.getData('VehicleTypes')
       .subscribe(res => {
         for (const vt of res) {
           this.data.push({

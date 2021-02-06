@@ -4,7 +4,7 @@
     <div class="d-flex justify-content-between">
       <mat-form-field appearance="outline">
         <mat-label>Filtrar</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+        <input matInput (keyup)="applyFilter($event)" #input>
       </mat-form-field>
       <button (click)="createItem()" class="btn btn-outline-secondary add-button consult-button">
         <mat-icon style="margin-top: 7px;">add</mat-icon>

@@ -4,11 +4,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { AlertDialogComponent } from 'src/app/shared/components/alert-dialog/alert-dialog.component';
 import { AlertDialogType, AlertDialogConfigI } from 'src/app/shared/components/alert-dialog/models/alert-dialog';
 import { status } from '../../../../../shared/components/models/field-config';
-import { VehiclesTypeService } from '../services/vehicles-type.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderService } from '../../../../../shared/services/loader.service';
 import { AlertOptionsService } from '../../shared/services/alert-options.service';
 import { Location } from '@angular/common';
+import { CrudActionsService } from '../../shared/services/crud-actions.service';
 
 @Component({
   selector: 'app-create',
@@ -23,13 +23,13 @@ export class CreateComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private vehiclesType: VehiclesTypeService,
     private dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
     private loader: LoaderService,
     private ao: AlertOptionsService,
-    private location: Location
+    private location: Location,
+    private crudActions: CrudActionsService
   ) { }
 
   ngOnInit(): void {
@@ -72,7 +72,7 @@ export class CreateComponent implements OnInit {
       }
 
       if (!this.Id) {
-        this.vehiclesType.postData(body)
+        this.crudActions.postData('VehicleTypes', body)
           .subscribe(res => {
             console.warn('CONSOLE DE POST:', res);
 
@@ -83,7 +83,7 @@ export class CreateComponent implements OnInit {
             this.actionError();
           });
       } else {
-        this.vehiclesType.putData(this.Id, body)
+        this.crudActions.putData('VehicleTypes', this.Id, body)
           .subscribe(res => {
             console.warn('CONSOLE DE PUT:', res);
 

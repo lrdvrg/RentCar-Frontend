@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CreateComponent } from './create/create.component';
 import { ConsultComponent } from './consult/consult.component';
-import { EditResolverService } from './services/edit-resolver.service';
+import { GeneralEditResolverService } from '../shared/services/general-edit-resolver.service';
 
 
 const routes: Routes = [
@@ -14,7 +14,7 @@ const routes: Routes = [
     path: 'edit',
     component: CreateComponent,
     resolve: {
-      data: EditResolverService
+      data: GeneralEditResolverService
     }
   },
   {

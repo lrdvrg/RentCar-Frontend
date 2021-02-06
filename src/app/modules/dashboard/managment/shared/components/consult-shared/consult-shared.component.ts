@@ -5,7 +5,7 @@ import { ActivatedRoute, NavigationEnd, Router, RouterEvent } from '@angular/rou
 import { MatDialog } from '@angular/material/dialog';
 import { AlertDialogComponent } from 'src/app/shared/components/alert-dialog/alert-dialog.component';
 import { AlertOptionsService } from '../../services/alert-options.service';
-import { VehiclesTypeService } from '../../../vehicles-type/services/vehicles-type.service';
+import { CrudActionsService } from '../../services/crud-actions.service';
 
 @Component({
   selector: 'app-consult-shared',
@@ -18,6 +18,7 @@ export class ConsultSharedComponent implements OnInit {
 
   @Input() title: string;
   @Input() name?: string;
+  @Input() apiName?: string;
   @Input() data: any;
   @Input() incomingDataSource: any;
 
@@ -28,7 +29,7 @@ export class ConsultSharedComponent implements OnInit {
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private ao: AlertOptionsService,
-    private vehiclesType: VehiclesTypeService,
+    private crudActions: CrudActionsService
   ) {
     router.events.subscribe((event: RouterEvent) => {
       if (event instanceof NavigationEnd) {
@@ -65,7 +66,7 @@ export class ConsultSharedComponent implements OnInit {
   }
 
   editItem(id) {
-    this.router.navigate([`../../${this.name}/edit`, { id: id }], { relativeTo: this.route });
+    this.router.navigate([`../../${this.name}/edit`, { id: id, name: this.apiName }], { relativeTo: this.route });
   }
 
   inactiveItem(element) {
@@ -82,7 +83,51 @@ export class ConsultSharedComponent implements OnInit {
               Description: element.description,
               Status: element.status === 'Activo' ? 'Inactivo' : 'Activo',
             };
-            this.vehiclesType.putData(element.Id, body)
+            this.crudActions.putData('VehicleTypes', element.Id, body)
+              .subscribe(res => {
+                window.location.reload();
+              }, err => {
+                console.log(err);
+              });
+          }
+        })
+        break;
+
+      case '/dashboard/managment/brand/consult':
+        const dialog2 = this.dialog.open(AlertDialogComponent, {
+          disableClose: true,
+          data: element.status === 'Activo' ? this.ao.deleteDialogWarningConfig('esta marca') : this.ao.activateDialogWarningConfig('esta marca')
+        });
+        dialog2.afterClosed().subscribe(res => {
+          if (res) {
+            const body = {
+              BrandId: element.Id,
+              Description: element.description,
+              Status: element.status === 'Activo' ? 'Inactivo' : 'Activo',
+            };
+            this.crudActions.putData('Brands', element.Id, body)
+              .subscribe(res => {
+                window.location.reload();
+              }, err => {
+                console.log(err);
+              });
+          }
+        })
+        break;
+
+      case '/dashboard/managment/fuel-types/consult':
+        const dialog3 = this.dialog.open(AlertDialogComponent, {
+          disableClose: true,
+          data: element.status === 'Activo' ? this.ao.deleteDialogWarningConfig('este tipo de combustible') : this.ao.activateDialogWarningConfig('este tipo de combustible')
+        });
+        dialog3.afterClosed().subscribe(res => {
+          if (res) {
+            const body = {
+              FuelTypeId: element.Id,
+              Description: element.description,
+              Status: element.status === 'Activo' ? 'Inactivo' : 'Activo',
+            };
+            this.crudActions.putData('FuelTypes', element.Id, body)
               .subscribe(res => {
                 window.location.reload();
               }, err => {
