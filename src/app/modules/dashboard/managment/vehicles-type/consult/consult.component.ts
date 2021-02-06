@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VehiclesTypeService } from '../services/vehicles-type.service';
 
 @Component({
   selector: 'app-consult',
@@ -12,47 +13,17 @@ export class ConsultComponent implements OnInit {
     titles: ['Código', 'Descripción', 'Estado', 'Acciones']
   }
 
-  data = [
-    { Id: '1', description: 'Descripcion', status: 'Estado' },
-    { Id: '2', description: 'Descripcion', status: 'Estado' },
-    { Id: '3', description: 'Descripcion', status: 'Estado' },
-    { Id: '4', description: 'Descripcion', status: 'Estado' },
-    { Id: '5', description: 'Descripcion', status: 'Estado' },
-    { Id: '1', description: 'Descripcion', status: 'Estado' },
-    { Id: '2', description: 'Descripcion', status: 'Estado' },
-    { Id: '3', description: 'Descripcion', status: 'Estado' },
-    { Id: '4', description: 'Descripcion', status: 'Estado' },
-    { Id: '5', description: 'Descripcion', status: 'Estado' },
-    { Id: '1', description: 'Descripcion', status: 'Estado' },
-    { Id: '2', description: 'Descripcion', status: 'Estado' },
-    { Id: '3', description: 'Descripcion', status: 'Estado' },
-    { Id: '4', description: 'Descripcion', status: 'Estado' },
-    { Id: '5', description: 'Descripcion', status: 'Estado' },
-    { Id: '1', description: 'Descripcion', status: 'Estado' },
-    { Id: '2', description: 'Descripcion', status: 'Estado' },
-    { Id: '3', description: 'Descripcion', status: 'Estado' },
-    { Id: '4', description: 'Descripcion', status: 'Estado' },
-    { Id: '5', description: 'Descripcion', status: 'Estado' },
-    { Id: '1', description: 'Descripcion', status: 'Estado' },
-    { Id: '2', description: 'Descripcion', status: 'Estado' },
-    { Id: '3', description: 'Descripcion', status: 'Estado' },
-    { Id: '4', description: 'Descripcion', status: 'Estado' },
-    { Id: '5', description: 'Descripcion', status: 'Estado' },
-    { Id: '1', description: 'Descripcion', status: 'Estado' },
-    { Id: '2', description: 'Descripcion', status: 'Estado' },
-    { Id: '3', description: 'Descripcion', status: 'Estado' },
-    { Id: '4', description: 'Descripcion', status: 'Estado' },
-    { Id: '5', description: 'Descripcion', status: 'Estado' },
-    { Id: '1', description: 'Descripcion', status: 'Estado' },
-    { Id: '2', description: 'Descripcion', status: 'Estado' },
-    { Id: '3', description: 'Descripcion', status: 'Estado' },
-    { Id: '4', description: 'Descripcion', status: 'Estado' },
-    { Id: '5', description: 'Descripcion', status: 'Estado' },
-  ]
+  data = []
 
-  constructor() { }
+  constructor(
+    private vehiclesType: VehiclesTypeService
+  ) { }
 
   ngOnInit(): void {
+    this.vehiclesType.getData()
+      .subscribe(res => {
+        console.warn('GET DATA', res);
+      });
   }
 
 }

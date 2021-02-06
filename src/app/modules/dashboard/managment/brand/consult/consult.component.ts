@@ -7,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConsultComponent implements OnInit {
 
+  columns = {
+    definition: ['Id', 'description', 'status', 'actions'],
+    titles: ['Código', 'Descripción', 'Estado', 'Acciones']
+  }
+
+  data = []
+
   constructor() { }
 
   ngOnInit(): void {

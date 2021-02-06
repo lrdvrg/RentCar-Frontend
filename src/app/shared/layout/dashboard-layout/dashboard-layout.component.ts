@@ -93,6 +93,24 @@ export class DashboardLayoutComponent implements OnInit {
             { name: 'Consultar', url: 'dashboard/managment/employees/consult' },
           ]
         },
+        {
+          name: 'Inspección',
+          iconString: 'accessibility',
+          expanded: false,
+          subItems: [
+            { name: 'Crear', url: 'dashboard/managment/inspection/create' },
+            { name: 'Consultar', url: 'dashboard/managment/inspection/consult' },
+          ]
+        },
+        {
+          name: 'Renta y Devolución',
+          iconString: 'accessibility',
+          expanded: false,
+          subItems: [
+            { name: 'Crear', url: 'dashboard/managment/rent-return/create' },
+            { name: 'Consultar', url: 'dashboard/managment/rent-return/consult' },
+          ]
+        },
       ],
     },
     {

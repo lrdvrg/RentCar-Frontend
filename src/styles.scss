@@ -29,6 +29,24 @@
   align-items: center;
 }
 
+.title {
+  font-size: 22px;
+  font-weight: 500;
+  color: #6f42c1;
+}
+
+.accordion-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #5a5a5a;
+}
+
+.form-button {
+  width: 220px !important;
+  height: 40px !important;
+  padding: 0 !important;
+}
+
 .rentcar-table {
   .mat-header-cell {
     font-size: 14px !important;
