@@ -1,1 +1,36 @@
-<p>create works!</p>
+<div class="container h-100 text-left">
+  <div class="title my-5">Tipo de Combustible</div>
+  <mat-accordion hideToggle>
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <div class="accordion-title">
+            Información basica
+          </div>
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="row">
+        <div class="col">
+          <app-input [group]="form" name="description" label="Descripción">
+          </app-input>
+        </div>
+        <div class="col">
+          <app-select name="status" [options]="status" [group]="form">
+          </app-select>
+        </div>
+        <div class="col"></div>
+        <div class="col"></div>
+      </div>
+    </mat-expansion-panel>
+    <div class="d-flex justify-content-between">
+      <button class="btn form-button btn-outline-secondary cancel-button">
+        Cancelar
+      </button>
+      <button class="btn form-button btn-outline-secondary">
+        Guardar
+      </button>
+    </div>
+  </mat-accordion>
+</div>
