@@ -25,10 +25,10 @@
       </div>
     </mat-expansion-panel>
     <div class="d-flex justify-content-between">
-      <button class="btn form-button btn-outline-secondary cancel-button">
+      <button (click)="cancel()" class="btn form-button btn-outline-secondary cancel-button">
         Cancelar
       </button>
-      <button class="btn form-button btn-outline-secondary">
+      <button (click)="postData()" class="btn form-button btn-outline-secondary">
         Guardar
       </button>
     </div>
