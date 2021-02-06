@@ -21,4 +21,19 @@ export class NumberComponent implements OnInit {
   ngOnInit() {
   }
 
+  maxFunction(control) {
+    if (control.errors) {
+      if (control.errors.max) {
+        if (control.value > control.errors.max.max) {
+          // tslint:disable-next-line: radix
+          control.setValue(parseInt(control.errors.max.max.toString()));
+        }
+      }
+    } else if (this.max) {
+      if (control.value > this.max) {
+        // tslint:disable-next-line: radix
+        control.setValue(parseInt(this.max.toString()));
+      }
+    }
+  }
 }

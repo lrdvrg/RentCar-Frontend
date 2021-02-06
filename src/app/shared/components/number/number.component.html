@@ -4,7 +4,8 @@
     <mat-label>{{label}}</mat-label>
     <input [formControlName]="name"
       onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : ((event.charCode >= 46 && event.charCode <= 57))"
-      matInput class="" type="number" [min]="min" [max]="max" [placeholder]="placeholder" #input>
+      matInput class="" type="number" [min]="min" [max]="max" [placeholder]="placeholder" #input
+      (input)="maxFunction(group.get(name))">
     <mat-error *ngIf="(group.get(name).touched && !group.get(name).valid) && !group.get(name).errors?.max">Este campo es
       obligatorio.</mat-error>
   </mat-form-field>
