@@ -71,7 +71,6 @@ export class ConsultSharedComponent implements OnInit {
   inactiveItem(element) {
     switch (this.father) {
       case '/dashboard/managment/vehicles-type/consult':
-        console.log(element);
         const dialog = this.dialog.open(AlertDialogComponent, {
           disableClose: true,
           data: element.status === 'Activo' ? this.ao.deleteDialogWarningConfig('este tipo de vehiculo') : this.ao.activateDialogWarningConfig('este tipo de vehiculo')
@@ -85,7 +84,6 @@ export class ConsultSharedComponent implements OnInit {
             };
             this.vehiclesType.putData(element.Id, body)
               .subscribe(res => {
-                console.warn('CONSOLE DE PUT:', res);
                 window.location.reload();
               }, err => {
                 console.log(err);
