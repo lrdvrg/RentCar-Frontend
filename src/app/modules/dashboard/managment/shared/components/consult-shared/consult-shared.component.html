@@ -29,11 +29,14 @@
           </ng-container>
           <ng-container *ngIf="data.definition[i] === 'actions'">
             <td class="padding-cell" style="width: 120px; max-width: 120px;" mat-cell *matCellDef="let element">
-              <button class="btn btn-outline-secondary consult-button actions-button p-0 mr-2">
+              <button (click)="editItem(element.Id)"
+                class="btn btn-outline-secondary consult-button actions-button p-0 mr-2">
                 <mat-icon class="actions-mat-icon">mode</mat-icon>
               </button>
-              <button class="btn btn-outline-secondary consult-button actions-button p-0">
-                <mat-icon class="actions-mat-icon">delete</mat-icon>
+              <button (click)="inactiveItem(element)"
+                class="btn btn-outline-secondary consult-button actions-button p-0">
+                <mat-icon *ngIf="element.status === 'Activo'" class="actions-mat-icon">remove_done</mat-icon>
+                <mat-icon *ngIf="element.status !== 'Activo'" class="actions-mat-icon">done_all</mat-icon>
               </button>
             </td>
           </ng-container>

@@ -19,4 +19,12 @@ export class VehiclesTypeService {
   postData(body): Observable<any> {
     return this.http.post(`${environment.apiUrl}/VehicleTypes`, body);
   }
+
+  putData(id, body): Observable<any> {
+    return this.http.put(`${environment.apiUrl}/VehicleTypes/${id}`, body);
+  }
+
+  getSpecificData(id): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/VehicleTypes/${id}`);
+  }
 }

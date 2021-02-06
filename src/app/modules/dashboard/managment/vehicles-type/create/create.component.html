@@ -1,5 +1,5 @@
 <div class="container h-100 text-left">
-  <div class="title my-5">Tipo de Vehiculo</div>
+  <div class="title my-5">Tipo de Vehiculo<span *ngIf="Id"> (ID #{{Id}})</span></div>
   <mat-accordion hideToggle>
     <mat-expansion-panel [expanded]="true">
       <mat-expansion-panel-header>

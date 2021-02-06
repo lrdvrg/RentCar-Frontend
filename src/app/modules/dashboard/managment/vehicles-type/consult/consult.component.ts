@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VehiclesTypeService } from '../services/vehicles-type.service';
 import { LoaderService } from '../../../../../shared/services/loader.service';
-
 @Component({
   selector: 'app-consult',
   templateUrl: './consult.component.html',
@@ -25,14 +24,13 @@ export class ConsultComponent implements OnInit {
     this.loader.start();
     this.vehiclesType.getData()
       .subscribe(res => {
-        console.warn('GET DATA', res);
         for (const vt of res) {
           this.data.push({
             Id: vt.VehicleTypeId, description: vt.Description, status: vt.Status
           });
         }
+        console.warn('GET DATA', this.data);
         this.loader.end();
       });
   }
-
 }

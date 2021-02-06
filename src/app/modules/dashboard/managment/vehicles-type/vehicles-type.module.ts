@@ -5,14 +5,13 @@ import { VehiclesTypeRoutingModule } from './vehicles-type-routing.module';
 import { ConsultComponent } from './consult/consult.component';
 import { CreateComponent } from './create/create.component';
 import { ManagmentModule } from '../managment.module';
-
-
 @NgModule({
   declarations: [ConsultComponent, CreateComponent],
   imports: [
     CommonModule,
     VehiclesTypeRoutingModule,
     ManagmentModule,
-  ]
+  ],
+  providers: []
 })
 export class VehiclesTypeModule { }

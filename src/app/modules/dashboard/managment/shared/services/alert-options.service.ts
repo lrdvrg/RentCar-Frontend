@@ -11,16 +11,28 @@ export class AlertOptionsService {
   alertDialogWarningConfig(type: string) {
     return {
       title: 'Confirmación',
-      content: `Se ha creado ${type} correctamente`,
+      content: `Se ha guardado ${type} correctamente`,
       dialogType: AlertDialogType.Done
     }
   }
 
-  deleteDialogWarningConfig(type: string) {
+  deleteDialogWarningConfig(type: string): AlertDialogConfigI {
     return {
       title: 'Confirmación',
       content: `¿Esta seguro de inactivar ${type}?`,
-      dialogType: AlertDialogType.ConfirmAction
+      dialogType: AlertDialogType.ConfirmAction,
+      primaryButtonText: 'Inactivar',
+      secundaryButtonText: 'Cancelar',
+    }
+  }
+
+  activateDialogWarningConfig(type: string): AlertDialogConfigI {
+    return {
+      title: 'Confirmación',
+      content: `¿Esta seguro de activar ${type}?`,
+      dialogType: AlertDialogType.ConfirmAction,
+      primaryButtonText: 'Activar',
+      secundaryButtonText: 'Cancelar',
     }
   }
 

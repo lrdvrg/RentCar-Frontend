@@ -19,6 +19,7 @@ export class CreateComponent implements OnInit {
 
   form: FormGroup;
   status = status;
+  Id = null;
 
   constructor(
     private fb: FormBuilder,
@@ -37,47 +38,87 @@ export class CreateComponent implements OnInit {
       description: this.fb.control('', Validators.required),
       status: this.fb.control('', Validators.required),
     });
+
+    this.route.data.subscribe(res => {
+      console.log(res);
+
+      if (res.data) {
+        const dataResolver = res.data;
+
+        this.Id = dataResolver.VehicleTypeId;
+        this.form.get('description').setValue(dataResolver.Description);
+        this.form.get('status').setValue(dataResolver.Status);
+      }
+    })
   }
 
   postData() {
     if (!this.form.invalid) {
       this.loader.start();
-
+      let body;
       const json = this.form.getRawValue();
 
-      const body = {
-        Description: json.description,
-        Status: json.status,
-      };
+      if (!this.Id) {
+        body = {
+          Description: json.description,
+          Status: json.status,
+        };
+      } else {
+        body = {
+          VehicleTypeId: this.Id,
+          Description: json.description,
+          Status: json.status,
+        };
+      }
 
-      this.vehiclesType.postData(body)
-        .subscribe(res => {
-          console.warn('CONSOLE DE POST:', res);
+      if (!this.Id) {
+        this.vehiclesType.postData(body)
+          .subscribe(res => {
+            console.warn('CONSOLE DE POST:', res);
 
-          this.loader.end();
-          this.dialog.open(AlertDialogComponent, {
-            disableClose: true,
-            data: this.ao.alertDialogWarningConfig('el tipo de vehiculo')
+            this.actionComplete();
+          }, err => {
+            console.log(err);
+
+            this.actionError();
           });
+      } else {
+        this.vehiclesType.putData(this.Id, body)
+          .subscribe(res => {
+            console.warn('CONSOLE DE PUT:', res);
 
-          this.router.navigate([`../../vehicles-type/consult`], { relativeTo: this.route });
+            this.actionComplete();
+          }, err => {
+            console.log(err);
 
-        }, err => {
-          console.log(err);
-          this.loader.end();
-
-          this.dialog.open(AlertDialogComponent, {
-            disableClose: true,
-            data: this.ao.alertDialogWarningConfig
+            this.actionError();
           });
-
-        });
+      }
     } else {
       this.dialog.open(AlertDialogComponent, {
         disableClose: true,
         data: this.ao.warningDialogWarningConfig
       });
     }
+  }
+
+  actionComplete() {
+    this.loader.end();
+    this.dialog.open(AlertDialogComponent, {
+      disableClose: true,
+      data: this.ao.alertDialogWarningConfig('el tipo de vehiculo')
+    });
+
+    this.router.navigate([`../../vehicles-type/consult`], { relativeTo: this.route });
+  }
+
+  actionError() {
+    this.loader.end();
+
+    this.dialog.open(AlertDialogComponent, {
+      disableClose: true,
+      data: this.ao.alertDialogWarningConfig
+    });
   }
 
   cancel() {
