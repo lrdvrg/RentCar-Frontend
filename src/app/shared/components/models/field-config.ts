@@ -25,11 +25,11 @@ export const status: FieldConfig = {
     name: 'status',
     options: [
         {
-            value: 'activo',
+            value: 'Activo',
             viewValue: 'Activo',
         },
         {
-            value: 'inactivo',
+            value: 'Inactivo',
             viewValue: 'Inactivo',
         }
     ],

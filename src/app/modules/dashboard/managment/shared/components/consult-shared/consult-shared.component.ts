@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-consult-shared',
@@ -10,12 +11,16 @@ import { MatTableDataSource } from '@angular/material/table';
 export class ConsultSharedComponent implements OnInit {
 
   @Input() title: string;
+  @Input() name?: string;
   @Input() data: any;
   @Input() incomingDataSource: any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
     console.warn(this.data, this.incomingDataSource);
@@ -37,11 +42,8 @@ export class ConsultSharedComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-}
+  createItem() {
+    this.router.navigate([`../../${this.name}/create`], { relativeTo: this.route });
+  }
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
 }

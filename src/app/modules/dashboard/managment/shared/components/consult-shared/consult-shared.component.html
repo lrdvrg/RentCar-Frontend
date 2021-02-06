@@ -6,7 +6,7 @@
         <mat-label>Filtrar</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
       </mat-form-field>
-      <button class="btn btn-outline-secondary add-button consult-button">
+      <button (click)="createItem()" class="btn btn-outline-secondary add-button consult-button">
         <mat-icon style="margin-top: 7px;">add</mat-icon>
       </button>
     </div>
