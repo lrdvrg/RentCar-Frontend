@@ -95,7 +95,7 @@ export class DashboardLayoutComponent implements OnInit {
         },
         {
           name: 'Inspección',
-          iconString: 'accessibility',
+          iconString: 'build',
           expanded: false,
           subItems: [
             { name: 'Crear', url: 'dashboard/managment/inspection/create' },
@@ -104,7 +104,7 @@ export class DashboardLayoutComponent implements OnInit {
         },
         {
           name: 'Renta y Devolución',
-          iconString: 'accessibility',
+          iconString: 'departure_board',
           expanded: false,
           subItems: [
             { name: 'Crear', url: 'dashboard/managment/rent-return/create' },
