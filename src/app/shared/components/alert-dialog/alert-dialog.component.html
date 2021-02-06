@@ -1,0 +1,38 @@
+<div class="dialog-wrapper-container">
+
+  <!-- Cuerpo del dialogo -->
+  <div class="alert-dialog-info-wrapper" [ngClass]="{
+         'alert-dialog-success': dialogContent.dialogType === validateAlertDialogDone,
+         'alert-dialog-warn': dialogContent.dialogType === validateAlertDialogWarning,
+         'alert-dialog-confirm': dialogContent.dialogType === validateAlertDialogConfirmAction }">
+    <div class="alert-dialog-icon-wrapper">
+      <img src="../../../../assets/icons-svg/exclamation-triangle.svg" alt="icon-exclamacion">
+    </div>
+    <h3 class="text-uppercase text-center font-weight-bold pt-4 pb-3" style="font-size: 28px;">
+      {{ dialogContent.title }} </h3>
+    <p class="text-center"> {{ dialogContent.content }} </p>
+  </div>
+
+  <!-- Acciones del dialogo segun su tipo -->
+  <ng-container>
+    <hr>
+    <div class="alert-dialog-footer pt-2 pr-3 pl-3 pb-3 display-flex flex-row"
+      *ngIf="dialogContent.dialogType === validateAlertDialogWarning || dialogContent.dialogType === validateAlertDialogDone">
+      <button *ngIf="dialogContent.dialogType === validateAlertDialogWarning" mat-raised-button
+        style="background-color: #FF9A33;" color="accent" [mat-dialog-close]="true"
+        class="mat-elevation-z3 w-100 text-color-white font-size-17 font-weight-bold warning-alert-button">Entendido</button>
+      <button *ngIf="dialogContent.dialogType === validateAlertDialogDone" mat-raised-button color="primary"
+        [mat-dialog-close]="true"
+        class="mat-elevation-z3 w-100 text-color-white font-size-17 font-weight-bold warning-alert-button">Entendido</button>
+    </div>
+    <div class="alert-dialog-footer pt-2 pr-3 pl-3 pb-3 display-flex flex-row alternate-theme"
+      *ngIf="dialogContent.dialogType === validateAlertDialogConfirmAction">
+      <button *ngIf="dialogContent.dialogType === validateAlertDialogConfirmAction" [mat-dialog-close]="false"
+        mat-button mat-raised-button
+        class="mat-elevation-z3 w-100 font-size-17 font-weight-bold secundary-action">{{ dialogContent.secundaryButtonText }}</button>
+      <button *ngIf="dialogContent.dialogType === validateAlertDialogConfirmAction" [mat-dialog-close]="true" mat-button
+        mat-flat-button color="primary"
+        class="ml-5 w-100 text-color-white font-size-17 font-weight-bold">{{ dialogContent.primaryButtonText }}</button>
+    </div>
+  </ng-container>
+</div>
