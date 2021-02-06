@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FieldConfig, status } from '../../../../../shared/components/models/field-config';
 
 @Component({
   selector: 'app-create',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateComponent implements OnInit {
 
-  constructor() { }
+  form: FormGroup;
+  status = status;
+
+  brands: FieldConfig = {
+    label: 'Marca',
+    name: 'brandId',
+    options: [],
+  }
+
+  constructor(
+    private fb: FormBuilder
+  ) { }
 
   ngOnInit(): void {
+    this.form = this.fb.group({
+      id: this.fb.control(''),
+      brandId: this.fb.control(''),
+      description: this.fb.control('', Validators.required),
+      status: this.fb.control('', Validators.required),
+    });
   }
 
 }
