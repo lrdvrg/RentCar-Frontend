@@ -44,6 +44,7 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { getSpanishPaginator } from './shared/locales/spanish-paginator';
 
 /**
  * NgModule that includes all Material modules.
@@ -100,6 +101,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatTreeModule,
   ],
   providers: [
+    { provide: MatPaginatorIntl, useValue: getSpanishPaginator() }
   ]
 })
 export class MaterialModule { }
