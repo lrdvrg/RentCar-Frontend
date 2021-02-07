@@ -31,7 +31,6 @@ export class ConsultComponent implements OnInit {
           });
         }
         console.warn('GET DATA', this.data);
-        this.loader.end();
       });
   }
 

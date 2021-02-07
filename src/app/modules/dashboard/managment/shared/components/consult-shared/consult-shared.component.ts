@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, NavigationEnd, Router, RouterEvent } from '@angular/router';
@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AlertDialogComponent } from 'src/app/shared/components/alert-dialog/alert-dialog.component';
 import { AlertOptionsService } from '../../services/alert-options.service';
 import { CrudActionsService } from '../../services/crud-actions.service';
+import { LoaderService } from '../../../../../../shared/services/loader.service';
 
 @Component({
   selector: 'app-consult-shared',
@@ -30,6 +31,8 @@ export class ConsultSharedComponent implements OnInit {
     private dialog: MatDialog,
     private ao: AlertOptionsService,
     private crudActions: CrudActionsService,
+    private loader: LoaderService,
+    private cd: ChangeDetectorRef
   ) {
     router.events.subscribe((event: RouterEvent) => {
       if (event instanceof NavigationEnd) {
@@ -46,11 +49,14 @@ export class ConsultSharedComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+    this.loader.start();
     setTimeout(() => {
       this.dataSource.paginator = this.paginator;
       this.dataSource.data = this.incomingDataSource;
+      this.cd.detectChanges();
+      this.loader.end();
+    }, 2000);
 
-    });
   }
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
@@ -180,6 +186,29 @@ export class ConsultSharedComponent implements OnInit {
               Status: element.status === 'Activo' ? 'Inactivo' : 'Activo',
             };
             this.crudActions.putData('Employees', element.Id, body)
+              .subscribe(res => {
+                window.location.reload();
+              }, err => {
+                console.log(err);
+              });
+          }
+        })
+        break;
+
+      case '/dashboard/managment/models/consult':
+        const dialog6 = this.dialog.open(AlertDialogComponent, {
+          disableClose: true,
+          data: element.status === 'Activo' ? this.ao.deleteDialogWarningConfig('este modelo') : this.ao.activateDialogWarningConfig('este modelo')
+        });
+        dialog6.afterClosed().subscribe(res => {
+          if (res) {
+            const body = {
+              ModelId: element.Id,
+              BrandId: element.brand.value,
+              Description: element.description,
+              Status: element.status === 'Activo' ? 'Inactivo' : 'Activo',
+            };
+            this.crudActions.putData('Models', element.Id, body)
               .subscribe(res => {
                 window.location.reload();
               }, err => {

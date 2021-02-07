@@ -15,6 +15,7 @@ export class ConsultComponent implements OnInit {
   }
 
   data = []
+  brands = []
 
   constructor(
     private crudActions: CrudActionsService,
@@ -23,16 +24,28 @@ export class ConsultComponent implements OnInit {
 
   ngOnInit(): void {
     this.loader.start();
-    this.crudActions.getData('Models')
+    this.crudActions.getData('Brands')
       .subscribe(res => {
         for (const vt of res) {
-          this.data.push({
-            Id: vt.ModelId, brand: vt.BrandId, description: vt.Description, status: vt.Status
+          this.brands.push({
+            value: vt.BrandId, viewValue: vt.Description
           });
+
         }
-        console.warn('GET DATA', this.data);
-        this.loader.end();
+        this.crudActions.getData('Models')
+          .subscribe(res => {
+            for (const vt of res) {
+              this.data.push({
+                Id: vt.ModelId, brand: this.getBrand(vt.BrandId), description: vt.Description, status: vt.Status
+              });
+            }
+            console.warn('GET DATA', this.data);
+          });
       });
+  }
+
+  getBrand(value) {
+    return this.brands.find(element => element.value === value);
   }
 
 

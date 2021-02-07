@@ -15,11 +15,11 @@ import { SharedModule } from '../../../shared/shared.module';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    SharedModule
+    SharedModule,
   ], exports: [
     ConsultSharedComponent,
     MaterialModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class ManagmentModule { }

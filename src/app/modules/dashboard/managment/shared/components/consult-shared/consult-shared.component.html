@@ -17,9 +17,14 @@
         <ng-container *ngFor="let column of data.definition; let i = index" [matColumnDef]="data.definition[i]">
           <th mat-header-cell *matHeaderCellDef>
             {{data.titles[i]}} </th>
-          <ng-container *ngIf="data.definition[i] !== 'actions' && data.definition[i] !== 'status'">
+          <ng-container
+            *ngIf="data.definition[i] !== 'actions' && data.definition[i] !== 'status' && data.definition[i] !== 'brand'">
             <td mat-cell *matCellDef="let element">
               {{element[data.definition[i]]}} </td>
+          </ng-container>
+          <ng-container *ngIf="data.definition[i] === 'brand'">
+            <td mat-cell *matCellDef="let element">
+              {{element[data.definition[i]].viewValue}} </td>
           </ng-container>
           <ng-container *ngIf="data.definition[i] === 'status'">
             <td mat-cell style="width: 120px; max-width: 120px;"
