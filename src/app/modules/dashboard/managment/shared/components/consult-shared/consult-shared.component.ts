@@ -29,7 +29,7 @@ export class ConsultSharedComponent implements OnInit {
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private ao: AlertOptionsService,
-    private crudActions: CrudActionsService
+    private crudActions: CrudActionsService,
   ) {
     router.events.subscribe((event: RouterEvent) => {
       if (event instanceof NavigationEnd) {
@@ -128,6 +128,58 @@ export class ConsultSharedComponent implements OnInit {
               Status: element.status === 'Activo' ? 'Inactivo' : 'Activo',
             };
             this.crudActions.putData('FuelTypes', element.Id, body)
+              .subscribe(res => {
+                window.location.reload();
+              }, err => {
+                console.log(err);
+              });
+          }
+        })
+        break;
+
+      case '/dashboard/managment/clients/consult':
+        const dialog4 = this.dialog.open(AlertDialogComponent, {
+          disableClose: true,
+          data: element.status === 'Activo' ? this.ao.deleteDialogWarningConfig('este cliente') : this.ao.activateDialogWarningConfig('este cliente')
+        });
+        dialog4.afterClosed().subscribe(res => {
+          if (res) {
+            const body = {
+              ClientId: element.Id,
+              Name: element.name,
+              DocumentNo: element.document,
+              CreditCard: element.noCard,
+              CreditLimit: element.creditLimit,
+              ClientType: element.personType,
+              Status: element.status === 'Activo' ? 'Inactivo' : 'Activo',
+            };
+            this.crudActions.putData('Clients', element.Id, body)
+              .subscribe(res => {
+                window.location.reload();
+              }, err => {
+                console.log(err);
+              });
+          }
+        })
+        break;
+
+      case '/dashboard/managment/employees/consult':
+        const dialog5 = this.dialog.open(AlertDialogComponent, {
+          disableClose: true,
+          data: element.status === 'Activo' ? this.ao.deleteDialogWarningConfig('este cliente') : this.ao.activateDialogWarningConfig('este cliente')
+        });
+        dialog5.afterClosed().subscribe(res => {
+          if (res) {
+            const body = {
+              EmployeeId: element.Id,
+              Name: element.name,
+              DocumentNo: element.document,
+              BatchLabor: element.labour,
+              CommissionPercentage: element.comission,
+              AdmissionDate: element.date,
+              Status: element.status === 'Activo' ? 'Inactivo' : 'Activo',
+            };
+            this.crudActions.putData('Employees', element.Id, body)
               .subscribe(res => {
                 window.location.reload();
               }, err => {

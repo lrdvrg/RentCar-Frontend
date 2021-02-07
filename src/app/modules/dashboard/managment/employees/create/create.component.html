@@ -1,5 +1,5 @@
 <div class="container h-100 text-left">
-  <div class="title my-5">Empleado</div>
+  <div class="title my-5">Empleado<span *ngIf="Id"> (ID #{{Id}})</span></div>
   <mat-accordion hideToggle>
     <mat-expansion-panel [expanded]="true">
       <mat-expansion-panel-header>
@@ -39,10 +39,10 @@
       </div>
     </mat-expansion-panel>
     <div class="d-flex justify-content-between">
-      <button class="btn form-button btn-outline-secondary cancel-button">
+      <button (click)="cancel()" class="btn form-button btn-outline-secondary cancel-button">
         Cancelar
       </button>
-      <button class="btn form-button btn-outline-secondary">
+      <button (click)="postData()" class="btn form-button btn-outline-secondary">
         Guardar
       </button>
     </div>
