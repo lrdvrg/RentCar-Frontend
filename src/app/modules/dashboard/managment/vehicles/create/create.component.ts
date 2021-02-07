@@ -135,26 +135,26 @@ export class CreateComponent implements OnInit {
       if (!this.Id) {
         body = {
           Description: json.description,
-          ChasisNochasisNo: json.chasisNo,
-          MotorNomotorNo: json.motorNo,
-          PlateNoplateNo: json.plateNo,
-          VehicleTypeIdvehicleTypeId: json.vehicleTypeId,
-          BrandIdbrandId: json.brandId,
-          ModelIdmodelId: json.modelId,
-          FuelTypeIdfuelTypeId: json.fuelTypeId,
+          ChasisNo: json.chasisNo,
+          MotorNo: json.motorNo,
+          PlateNo: json.plateNo,
+          VehicleTypeId: json.vehicleTypeId,
+          BrandId: json.brandId,
+          ModelId: json.modelId,
+          FuelTypeId: json.fuelTypeId,
           Status: json.status,
         };
       } else {
         body = {
           VehicleId: this.Id,
           Description: json.description,
-          ChasisNochasisNo: json.chasisNo,
-          MotorNomotorNo: json.motorNo,
-          PlateNoplateNo: json.plateNo,
-          VehicleTypeIdvehicleTypeId: json.vehicleTypeId,
-          BrandIdbrandId: json.brandId,
-          ModelIdmodelId: json.modelId,
-          FuelTypeIdfuelTypeId: json.fuelTypeId,
+          ChasisNo: json.chasisNo,
+          MotorNo: json.motorNo,
+          PlateNo: json.plateNo,
+          VehicleTypeId: json.vehicleTypeId,
+          BrandId: json.brandId,
+          ModelId: json.modelId,
+          FuelTypeId: json.fuelTypeId,
           Status: json.status,
         };
       }
