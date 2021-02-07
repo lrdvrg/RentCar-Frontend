@@ -78,7 +78,8 @@ export class CreateComponent implements OnInit {
       if (res.data) {
         const dataResolver = res.data;
 
-        this.Id = dataResolver.BrandId;
+        this.brandChange({ valor: dataResolver.BrandId });
+        this.Id = dataResolver.VehicleId;
         this.form.get('description').setValue(dataResolver.Description);
         this.form.get('chasisNo').setValue(dataResolver.ChasisNo);
         this.form.get('motorNo').setValue(dataResolver.MotorNo);
@@ -216,6 +217,7 @@ export class CreateComponent implements OnInit {
         .subscribe(res => {
           this.model.options = [];
           for (const vt of res) {
+            console.log(event);
             if (vt.BrandId === event.valor) {
               if (vt.Status === 'Activo') {
                 this.model.options.push({

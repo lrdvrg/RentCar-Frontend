@@ -65,7 +65,7 @@ export class ConsultComponent implements OnInit {
                       console.log(vt);
 
                       this.data.push({
-                        Id: vt.ModelId, noChasis: vt.ChasisNo, noMotor: vt.MotorNo, noPlate: vt.PlateNo, vehicleType: this.getvehicleType(vt.VehicleTypeId), brand: this.getBrand(vt.BrandId), model: this.getModel(vt.ModelId), fuelType: this.getFuelType(vt.FuelTypeId), description: vt.Description, status: vt.Status
+                        Id: vt.VehicleId, noChasis: vt.ChasisNo, noMotor: vt.MotorNo, noPlate: vt.PlateNo, vehicleType: this.getvehicleType(vt.VehicleTypeId), brand: this.getBrand(vt.BrandId), model: this.getModel(vt.ModelId), fuelType: this.getFuelType(vt.FuelTypeId), description: vt.Description, status: vt.Status
                       });
                     }
                     console.warn('GET DATA', this.data);
