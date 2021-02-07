@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LoaderService } from 'src/app/shared/services/loader.service';
+import { CrudActionsService } from '../../shared/services/crud-actions.service';
 
 @Component({
   selector: 'app-consult',
@@ -14,9 +16,24 @@ export class ConsultComponent implements OnInit {
 
   data = []
 
-  constructor() { }
+  constructor(
+    private crudActions: CrudActionsService,
+    private loader: LoaderService
+  ) { }
 
   ngOnInit(): void {
+    this.loader.start();
+    this.crudActions.getData('Models')
+      .subscribe(res => {
+        for (const vt of res) {
+          this.data.push({
+            Id: vt.ModelId, brand: vt.BrandId, description: vt.Description, status: vt.Status
+          });
+        }
+        console.warn('GET DATA', this.data);
+        this.loader.end();
+      });
   }
+
 
 }
