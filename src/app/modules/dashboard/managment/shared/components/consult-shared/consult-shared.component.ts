@@ -218,6 +218,37 @@ export class ConsultSharedComponent implements OnInit {
         })
         break;
 
+      case '/dashboard/managment/vehicles/consult':
+        const dialog7 = this.dialog.open(AlertDialogComponent, {
+          disableClose: true,
+          data: element.status === 'Activo' ? this.ao.deleteDialogWarningConfig('este vehiculo') : this.ao.activateDialogWarningConfig('este vehiculo')
+        });
+        dialog7.afterClosed().subscribe(res => {
+          const body = {
+            VehicleId: element.Id,
+            Description: element.description,
+            ChasisNo: element.noChasis,
+            MotorNo: element.noMotor,
+            PlateNo: element.noPlate,
+            VehicleTypeId: element.vehicleType.value,
+            BrandId: element.brand.value,
+            ModelId: element.model.value,
+            FuelTypeId: element.fuelType.value,
+            Status: element.status === 'Activo' ? 'Inactivo' : 'Activo',
+          };
+          console.log(body);
+
+          if (res) {
+            this.crudActions.putData('Vehicles', element.Id, body)
+              .subscribe(res => {
+                window.location.reload();
+              }, err => {
+                console.log(err);
+              });
+          }
+        })
+        break;
+
       default:
         break;
     }
