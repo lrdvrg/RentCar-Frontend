@@ -6,8 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrandsPipe } from './modules/dashboard/managment/shared/pipes/brands.pipe';
-
 @NgModule({
   declarations: [
     AppComponent
