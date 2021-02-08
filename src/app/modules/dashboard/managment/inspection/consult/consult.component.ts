@@ -11,8 +11,8 @@ export class ConsultComponent implements OnInit {
 
   columns = {
     definition: ['Id', 'vehicle', 'client', 'haveGrated', 'haveReplacementTyre', 'haveWindowCrack', 'haveJack', 'fuel', 'flTyreStatus', 'frTyreStatus', 'rlTyreStatus', 'rrTyreStatus', 'date', 'comentary', 'employee', 'status', 'actions'],
-    titles: ['Código', 'Vehículo', 'Cliente', 'Ralladuras', 'Goma de Respuesta', 'Roturas de Cristal', 'Gato', 'Cantidad de Combustible', 'Estado (Delantera izquierda)',
-      'Estado (Delantera derecha)', 'Estado (Trasera izquierda)', 'Estado (Trasera derecha)', 'Fecha', 'Comentario', 'Empleado', 'Estado', 'Acciones']
+    titles: ['Código', 'Vehículo', 'Cliente', 'Ralladuras', 'Goma de Respuesta', 'Roturas de Cristal', 'Gato', 'Combustible', 'Estado (DI)',
+      'Estado (DD)', 'Estado (TI)', 'Estado (TD)', 'Fecha', 'Comentario', 'Empleado', 'Estado', 'Acciones']
   }
 
   data = []

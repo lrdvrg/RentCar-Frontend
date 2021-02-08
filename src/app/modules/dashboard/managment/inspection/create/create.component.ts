@@ -16,7 +16,7 @@ import { CrudActionsService } from '../../shared/services/crud-actions.service';
 })
 export class CreateComponent implements OnInit {
   form: FormGroup;
-  status = status;
+  status = inspection;
   todayDate = new Date();
   Id = null;
 
@@ -289,4 +289,19 @@ export class CreateComponent implements OnInit {
     this.location.back();
   }
 
+}
+
+export const inspection: FieldConfig = {
+  label: 'Estado',
+  name: 'status',
+  options: [
+    {
+      value: 'Realizada',
+      viewValue: 'Realizada',
+    },
+    {
+      value: 'Pendiente',
+      viewValue: 'Pendiente',
+    }
+  ],
 }

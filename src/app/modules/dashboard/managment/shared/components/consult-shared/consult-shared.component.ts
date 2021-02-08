@@ -279,6 +279,43 @@ export class ConsultSharedComponent implements OnInit {
         })
         break;
 
+      case '/dashboard/managment/inspection/consult':
+        const dialog9 = this.dialog.open(AlertDialogComponent, {
+          disableClose: true,
+          data: element.status === 'Activo' ? this.ao.deleteDialogWarningConfig('esta inspección') : this.ao.activateDialogWarningConfig('esta inspección')
+        });
+        dialog9.afterClosed().subscribe(res => {
+          const body = {
+            InspectionId: element.Id,
+            VehicleId: element.vehicle.value,
+            ClientId: element.client.value,
+            HaveGrated: element.haveGrated,
+            HaveReplacementTyre: element.haveReplacementTyre,
+            HaveWindowCrack: element.haveWindowCrack,
+            HaveJack: element.haveJack,
+            Fuel: element.fuel,
+            FLTyreStatus: element.flTyreStatus,
+            FRTyreStatus: element.frTyreStatus,
+            RLTyreStatus: element.rlTyreStatus,
+            RRTyreStatus: element.rrTyreStatus,
+            Date: element.date,
+            Comment: element.comentary,
+            EmployeeId: element.employee.value,
+            Status: element.status === 'Realizada' ? 'Pendiente' : 'Realizada',
+          };
+          console.log(body);
+
+          if (res) {
+            this.crudActions.putData('Inspections', element.Id, body)
+              .subscribe(res => {
+                window.location.reload();
+              }, err => {
+                console.log(err);
+              });
+          }
+        })
+        break;
+
       default:
         break;
     }
