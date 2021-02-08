@@ -1,1 +1,62 @@
-<p>create works!</p>
+<div class="container h-100 text-left">
+  <div class="title my-5">Inspección <span *ngIf="Id"> (ID #{{Id}})</span></div>
+  <mat-accordion hideToggle>
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <div class="accordion-title">
+            Información basica
+          </div>
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="row">
+        <app-select class="col" name="vehicle" [options]="vehicle" [group]="form">
+        </app-select>
+        <app-select class="col" name="client" [options]="client" [group]="form">
+        </app-select>
+        <app-select class="col" name="haveGrated" label="¿Tiene ralladuras?" [options]="yesno" [group]="form">
+        </app-select>
+        <app-select class="col" name="haveReplacementTyre" label="¿Tiene goma de respuesta?" [options]="yesno"
+          [group]="form">
+        </app-select>
+        <app-select class="col" name="haveWindowCrack" label="¿Tiene roturas en el cristal?" [options]="yesno"
+          [group]="form">
+        </app-select>
+        <app-select class="col" name="haveJack" label="¿Tiene gato?" [options]="yesno" [group]="form">
+        </app-select>
+        <app-select class="col" name="fuel" label="Cantidad Combustible" [options]="fuel" [group]="form">
+        </app-select>
+        <app-select class="col" name="flTyreStatus" label="Estado de goma (delantera izquierda)" [options]="tyreStatus"
+          [group]="form">
+        </app-select>
+        <app-select class="col" name="frTyreStatus" label="Estado de goma (delantera derecha)" [options]="tyreStatus"
+          [group]="form">
+        </app-select>
+        <app-select class="col" name="rlTyreStatus" label="Estado de goma (trasera izquierda)" [options]="tyreStatus"
+          [group]="form">
+        </app-select>
+        <app-select class="col" name="rrTyreStatus" label="Estado de goma (trasera derecha)" [options]="tyreStatus"
+          [group]="form">
+        </app-select>
+        <app-date class="col" [group]="form" name="date" [max]="todayDate" label="Fecha de Inspección">
+        </app-date>
+        <app-input class="col" [group]="form" name="comentary" label="Comentario">
+        </app-input>
+        <app-select class="col" name="employee" [options]="employee" [group]="form">
+        </app-select>
+        <app-select class="col-3" name="status" [options]="status" [group]="form">
+        </app-select>
+      </div>
+    </mat-expansion-panel>
+    <div class="d-flex justify-content-between">
+      <button (click)="cancel()" class="btn form-button btn-outline-secondary cancel-button">
+        Cancelar
+      </button>
+      <button (click)="postData()" class="btn form-button btn-outline-secondary">
+        Guardar
+      </button>
+    </div>
+  </mat-accordion>
+</div>
