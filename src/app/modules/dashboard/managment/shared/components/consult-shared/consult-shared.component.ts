@@ -59,7 +59,6 @@ export class ConsultSharedComponent implements OnInit {
 
   }
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource();
 
   applyFilter(event: Event) {
