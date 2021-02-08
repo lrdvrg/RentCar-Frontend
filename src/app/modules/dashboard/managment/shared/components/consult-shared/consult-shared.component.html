@@ -17,14 +17,20 @@
         <ng-container *ngFor="let column of data.definition; let i = index" [matColumnDef]="data.definition[i]">
           <th mat-header-cell *matHeaderCellDef>
             {{data.titles[i]}} </th>
-          <ng-container *ngIf="data.definition[i] !== 'actions' && data.definition[i] !== 'status'">
+          <ng-container
+            *ngIf="data.definition[i] !== 'actions' && data.definition[i] !== 'status' && !data.definition[i].toLowerCase().includes('date')">
             <td mat-cell *matCellDef="let element">
               {{ element[data.definition[i]].viewValue ? element[data.definition[i]].viewValue: element[data.definition[i]] }}
             </td>
           </ng-container>
+          <ng-container *ngIf="data.definition[i].toLowerCase().includes('date')">
+            <td mat-cell *matCellDef="let element">
+              {{ element[data.definition[i]] | date:'yyyy-MM-dd' }}
+            </td>
+          </ng-container>
           <ng-container *ngIf="data.definition[i] === 'status'">
             <td mat-cell style="width: 40px; max-width: 40px;"
-              [ngClass]="{'text-color-green': element[data.definition[i]] === 'Activo', 'text-color-red': element[data.definition[i]] === 'Inactivo'}"
+              [ngClass]="{'text-color-green': element[data.definition[i]] === 'Activo' ||  element[data.definition[i]] === 'Rentado', 'text-color-blue': element[data.definition[i]] === 'Retornado', 'text-color-red': element[data.definition[i]] === 'Inactivo'}"
               *matCellDef="let element">
               {{element[data.definition[i]]}} </td>
           </ng-container>
@@ -34,10 +40,11 @@
                 class="btn btn-outline-secondary consult-button actions-button p-0 mr-2">
                 <mat-icon class="actions-mat-icon">mode</mat-icon>
               </button>
-              <button (click)="inactiveItem(element)"
+              <button (click)="inactiveItem(element)" *ngIf="element.status !== 'Retornado'"
                 class="btn btn-outline-secondary consult-button actions-button p-0">
                 <mat-icon *ngIf="element.status === 'Activo'" class="actions-mat-icon">remove_done</mat-icon>
-                <mat-icon *ngIf="element.status !== 'Activo'" class="actions-mat-icon">done_all</mat-icon>
+                <mat-icon *ngIf="element.status === 'Inactivo'" class="actions-mat-icon">done_all</mat-icon>
+                <mat-icon *ngIf="element.status === 'Rentado'" class="actions-mat-icon">taxi_alert</mat-icon>
               </button>
             </td>
           </ng-container>

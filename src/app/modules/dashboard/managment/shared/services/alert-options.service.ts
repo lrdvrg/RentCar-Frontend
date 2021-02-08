@@ -36,6 +36,16 @@ export class AlertOptionsService {
     }
   }
 
+  registerDialogWarningConfig(type: string): AlertDialogConfigI {
+    return {
+      title: 'Confirmación',
+      content: `Confirmar retorno de ${type}`,
+      dialogType: AlertDialogType.ConfirmAction,
+      primaryButtonText: 'Confirmar',
+      secundaryButtonText: 'Cancelar',
+    }
+  }
+
 
   warningDialogWarningConfig: AlertDialogConfigI = {
     title: 'Error',

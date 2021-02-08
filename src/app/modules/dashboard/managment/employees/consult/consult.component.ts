@@ -28,7 +28,7 @@ export class ConsultComponent implements OnInit {
       .subscribe(res => {
         for (const vt of res) {
           this.data.push({
-            Id: vt.EmployeeId, name: vt.Name, document: vt.DocumentNo, labour: vt.BatchLabor, comission: vt.CommissionPercentage, date: formatDate(vt.AdmissionDate, 'dd/MM/yyyy', 'en-us'), status: vt.Status
+            Id: vt.EmployeeId, name: vt.Name, document: vt.DocumentNo, labour: vt.BatchLabor, comission: vt.CommissionPercentage, date: vt.AdmissionDate, status: vt.Status
           });
         }
         console.warn('GET DATA', this.data);

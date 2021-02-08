@@ -248,6 +248,37 @@ export class ConsultSharedComponent implements OnInit {
         })
         break;
 
+      case '/dashboard/managment/rent-return/consult':
+        const dialog8 = this.dialog.open(AlertDialogComponent, {
+          disableClose: true,
+          data: this.ao.registerDialogWarningConfig('este vehiculo')
+        });
+        dialog8.afterClosed().subscribe(res => {
+          const body = {
+            RentAndRefundId: element.Id,
+            EmployeeId: element.employee.value,
+            VehicleId: element.vehicle.value,
+            ClientId: element.client.value,
+            RentDate: element.rentDate,
+            RefundDate: element.returnDate,
+            AmountPerDay: element.amountPerDay,
+            AmountOfDays: element.days,
+            Comment: element.comentary,
+            Status: 'Retornado',
+          };
+          console.log(body);
+
+          if (res) {
+            this.crudActions.putData('RentAndRefunds', element.Id, body)
+              .subscribe(res => {
+                window.location.reload();
+              }, err => {
+                console.log(err);
+              });
+          }
+        })
+        break;
+
       default:
         break;
     }
