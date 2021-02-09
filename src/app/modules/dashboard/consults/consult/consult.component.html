@@ -1,1 +1,13 @@
-<p>consult works!</p>
+<div class="container mt-5">
+  <div class="row">
+    <mat-card matRipple matRippleColor="#6f42c1" (click)="navigateTo(item.subItems[0].url)"
+      *ngFor="let item of subItems" class="example-card col-4">
+      <mat-card-header>
+        <mat-card-title class="title">{{item.name}}</mat-card-title>
+      </mat-card-header>
+      <mat-icon class="icon">{{item.iconString}}</mat-icon>
+      <mat-card-content>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
