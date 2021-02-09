@@ -260,7 +260,7 @@ export class ConsultSharedComponent implements OnInit {
             VehicleId: element.vehicle.value,
             ClientId: element.client.value,
             RentDate: element.rentDate,
-            RefundDate: element.returnDate,
+            RefundDate: new Date(),
             AmountPerDay: element.amountPerDay,
             AmountOfDays: element.days,
             Comment: element.comentary,
@@ -269,9 +269,33 @@ export class ConsultSharedComponent implements OnInit {
           console.log(body);
 
           if (res) {
-            this.crudActions.putData('RentAndRefunds', element.Id, body)
+            this.crudActions.getSpecificData('Vehicles', element.vehicle.value)
               .subscribe(res => {
-                window.location.reload();
+                const vehicleBody = {
+                  VehicleId: res.VehicleId,
+                  Description: res.Description,
+                  ChasisNo: res.ChasisNo,
+                  MotorNo: res.MotorNo,
+                  PlateNo: res.PlateNo,
+                  VehicleTypeId: res.VehicleTypeId,
+                  BrandId: res.BrandId,
+                  ModelId: res.ModelId,
+                  FuelTypeId: res.FuelTypeId,
+                  Status: 'Activo',
+                };
+                console.log(res);
+                console.log(vehicleBody);
+                this.crudActions.putData('Vehicles', res.VehicleId, vehicleBody)
+                  .subscribe(res => {
+                    this.crudActions.putData('RentAndRefunds', element.Id, body)
+                      .subscribe(res => {
+                        window.location.reload();
+                      }, err => {
+                        console.log(err);
+                      });
+                  }, err => {
+                    console.log(err);
+                  });
               }, err => {
                 console.log(err);
               });

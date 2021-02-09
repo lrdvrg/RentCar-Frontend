@@ -58,28 +58,12 @@ export class CreateComponent implements OnInit {
       employee: this.fb.control('', Validators.required),
       vehicle: this.fb.control('', Validators.required),
       client: this.fb.control('', Validators.required),
-      rentDate: this.fb.control('', Validators.required),
-      returnDate: this.fb.control({ value: '', disabled: true }, Validators.required),
+      rentDate: this.fb.control(new Date(), Validators.required),
+      returnDate: this.fb.control({ value: '', disabled: true }),
       amountPerDay: this.fb.control('', Validators.required),
       days: this.fb.control('', Validators.required),
-      comentary: this.fb.control('', Validators.required),
-      status: this.fb.control('', Validators.required),
-    });
-
-    this.form.get('days').valueChanges.subscribe(value => {
-      if (this.form.value.rentDate !== '' && value !== null) {
-        let date = new Date(this.form.value.rentDate);
-        date.setDate(date.getDate() + value);
-        this.form.get('returnDate').setValue(date);
-      }
-    });
-
-    this.form.get('rentDate').valueChanges.subscribe(value => {
-      if (value !== '' && this.form.value.days !== null) {
-        let date = new Date(value);
-        date.setDate(date.getDate() + this.form.value.days);
-        this.form.get('returnDate').setValue(date);
-      }
+      comentary: this.fb.control(''),
+      status: this.fb.control({ value: 'Rentado', disabled: true }),
     });
 
     this.route.data.subscribe(res => {
@@ -172,16 +156,41 @@ export class CreateComponent implements OnInit {
       }
 
       if (!this.Id) {
-        this.crudActions.postData('RentAndRefunds', body)
+        this.crudActions.getSpecificData('Vehicles', body.VehicleId)
           .subscribe(res => {
-            console.warn('CONSOLE DE POST:', res);
+            const vehicleBody = {
+              VehicleId: res.VehicleId,
+              Description: res.Description,
+              ChasisNo: res.ChasisNo,
+              MotorNo: res.MotorNo,
+              PlateNo: res.PlateNo,
+              VehicleTypeId: res.VehicleTypeId,
+              BrandId: res.BrandId,
+              ModelId: res.ModelId,
+              FuelTypeId: res.FuelTypeId,
+              Status: 'Rentado',
+            };
+            console.log(res);
+            console.log(vehicleBody);
+            this.crudActions.putData('Vehicles', vehicleBody.VehicleId, vehicleBody)
+              .subscribe(res => {
+                this.crudActions.postData('RentAndRefunds', body)
+                  .subscribe(res => {
+                    console.warn('CONSOLE DE POST:', res);
 
-            this.actionComplete();
+                    this.actionComplete();
+                  }, err => {
+                    console.log(err);
+
+                    this.actionError();
+                  });
+              }, err => {
+                console.log(err);
+              });
           }, err => {
             console.log(err);
-
-            this.actionError();
           });
+
       } else {
         this.crudActions.putData('RentAndRefunds', this.Id, body)
           .subscribe(res => {
