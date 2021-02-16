@@ -53,6 +53,10 @@ export class ConsultSharedComponent implements OnInit {
     setTimeout(() => {
       this.dataSource.paginator = this.paginator;
       this.dataSource.data = this.incomingDataSource;
+      this.dataSource.filterPredicate = (data: any, filter) => {
+        const dataStr = JSON.stringify(data).toLowerCase();
+        return dataStr.indexOf(filter) != -1;
+      }
       this.cd.detectChanges();
       this.loader.end();
     }, 2000);
