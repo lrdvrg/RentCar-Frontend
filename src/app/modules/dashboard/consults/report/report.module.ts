@@ -6,7 +6,7 @@ import { ReportComponent } from './report.component';
 import { MaterialModule } from '../../../../material.module';
 import { SharedModule } from '../../../../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { MatTableExporterModule } from 'mat-table-exporter';
 
 @NgModule({
   declarations: [ReportComponent],
@@ -16,7 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableExporterModule
   ]
 })
 export class ReportModule { }

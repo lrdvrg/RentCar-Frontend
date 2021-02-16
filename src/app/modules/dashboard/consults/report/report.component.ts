@@ -51,7 +51,7 @@ export class ReportComponent implements OnInit {
     private ao: AlertOptionsService,
     private crudActions: CrudActionsService,
     private loader: LoaderService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
   ) {
   }
 
@@ -116,20 +116,25 @@ export class ReportComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  print() {
-
-  }
-
   search() {
     this.filterData = this.tableData;
 
     if (this.firstDate !== '') {
       console.log('intenta filtrar: firstdate')
-      this.filterData = this.tableData.filter((word: any) => word.rentDate > this.firstDate);
+      this.filterData = this.tableData.filter((word: any) => {
+        let date = new Date(word.rentDate);
+        let selectedDate = new Date(this.firstDate);
+        return date >= selectedDate
+      });
     }
     if (this.lastDate !== '') {
       console.log('intenta filtrar: lastdate')
-      this.filterData = this.tableData.filter((word: any) => word.rentDate < this.lastDate);
+      this.filterData = this.tableData.filter((word: any) => {
+        let date = new Date(word.rentDate);
+        let selectedDate = new Date(this.lastDate);
+        return date <= selectedDate
+      });
+
     }
     if (this.statusFilter !== '') {
       console.log('intenta filtrar: estado')

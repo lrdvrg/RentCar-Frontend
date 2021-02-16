@@ -40,13 +40,16 @@
         <button (click)="search()" class="btn btn-outline-secondary add-button consult-button mr-1">
           <mat-icon style="margin-top: 7px;">search</mat-icon>
         </button>
-        <button (click)="print()" class="btn btn-outline-secondary add-button consult-button">
+        <button
+          (click)="exporter.exportTable('xlsx', {fileName:'Reporte', sheet: 'sheet_name', Props: {Author: 'RentCar'}})"
+          class="btn btn-outline-secondary add-button consult-button">
           <mat-icon style="margin-top: 7px;">print</mat-icon>
         </button>
       </div>
     </div>
     <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource" class="rentcar-table  w-100">
+      <table matTableExporter #exporter="matTableExporter" mat-table [dataSource]="dataSource"
+        class="rentcar-table  w-100">
         <ng-container *ngFor="let column of data.definition; let i = index" [matColumnDef]="data.definition[i]">
           <th mat-header-cell *matHeaderCellDef>
             {{data.titles[i]}} </th>
