@@ -65,6 +65,24 @@ export class AlertOptionsService {
     dialogType: AlertDialogType.Warning
   }
 
+  userExistsDialogWarningConfig: AlertDialogConfigI = {
+    title: 'Error',
+    content: 'Este nombre de usuario ya existe, intente otro',
+    dialogType: AlertDialogType.Warning
+  }
+
+  passwordDialogWarningConfig: AlertDialogConfigI = {
+    title: 'Error',
+    content: 'Las contraseñas no coinciden',
+    dialogType: AlertDialogType.Warning
+  }
+
+  userCreatedDialogWarningConfig: AlertDialogConfigI = {
+    title: 'Confirmación',
+    content: `Se ha creado el usuario correctamente`,
+    dialogType: AlertDialogType.Done
+  }
+
   errorDialogWarningConfig: AlertDialogConfigI = {
     title: 'Error',
     content: 'Ha ocurrido un error al intentar realizar esta petición, intente de nuevo mas tarde',
