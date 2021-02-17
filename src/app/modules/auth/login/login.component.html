@@ -1,0 +1,26 @@
+<div class="w-100 h-100 d-flex align-items-center" style="background-color: #6f42c1;">
+  <div class="container dashboard-wrapper p-5">
+    <div class="row">
+      <div class="col-4">
+        <h1>RentCar</h1>
+        <h2>Iniciar Sesión</h2>
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Usuario</mat-label>
+          <input autocomplete="off" matInput [(ngModel)]="user" #input>
+        </mat-form-field><br>
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input autocomplete="off" type="password" matInput [(ngModel)]="password" #input>
+        </mat-form-field>
+        <button (click)="login()" style="width: 100% !important;" class="w-100 btn form-button btn-outline-secondary">
+          Iniciar Sesión
+        </button>
+      </div>
+      <div class="col">
+        <img src="../../../assets/illustrations/login.svg" alt="ilustracion-humano-02"
+          class="animate__animated animate__fadeInUp illustration-dashboard">
+      </div>
+    </div>
+  </div>
+
+</div>

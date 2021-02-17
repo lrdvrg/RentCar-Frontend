@@ -53,6 +53,18 @@ export class AlertOptionsService {
     dialogType: AlertDialogType.Warning
   }
 
+  loginWarningDialogWarningConfig: AlertDialogConfigI = {
+    title: 'Alerta',
+    content: 'No pueden haber campos vacios',
+    dialogType: AlertDialogType.Warning
+  }
+
+  loginErrorDialogWarningConfig: AlertDialogConfigI = {
+    title: 'Error',
+    content: 'El usuario o contraseña es incorrecto, intente de nuevo',
+    dialogType: AlertDialogType.Warning
+  }
+
   errorDialogWarningConfig: AlertDialogConfigI = {
     title: 'Error',
     content: 'Ha ocurrido un error al intentar realizar esta petición, intente de nuevo mas tarde',

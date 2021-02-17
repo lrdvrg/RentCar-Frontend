@@ -1,8 +1,11 @@
 <div class="wrapper-layout">
-  <mat-toolbar color="primary" class="mat-elevation-z5 custom-background">
+  <mat-toolbar color="primary" class="mat-elevation-z5 custom-background d-flex justify-content-between">
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
       (click)="opened = !opened">
       <mat-icon [ngClass]="{'menu-icon-custom-green': !opened}" class="menu-icon-custom">menu</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="logoff()">
+      <mat-icon class="menu-icon-custom">logout</mat-icon>
     </button>
   </mat-toolbar>
   <mat-sidenav-container class="height-100 text-center" style="height: 100%;" autosize>

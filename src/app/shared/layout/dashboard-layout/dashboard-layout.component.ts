@@ -145,6 +145,11 @@ export class DashboardLayoutComponent implements OnInit {
 
   }
 
+  logoff() {
+    localStorage.removeItem('user');
+    this.router.navigateByUrl('auth/login');
+  }
+
 }
 
 export interface MenuItems {
