@@ -44,6 +44,8 @@ export class ReportComponent implements OnInit {
   statusFilter = '';
   employeeFilter = '';
 
+  todayDate = new Date();
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -121,7 +123,7 @@ export class ReportComponent implements OnInit {
 
     if (this.firstDate !== '') {
       console.log('intenta filtrar: firstdate')
-      this.filterData = this.tableData.filter((word: any) => {
+      this.filterData = this.filterData.filter((word: any) => {
         let date = new Date(word.rentDate);
         let selectedDate = new Date(this.firstDate);
         return date >= selectedDate
@@ -129,7 +131,7 @@ export class ReportComponent implements OnInit {
     }
     if (this.lastDate !== '') {
       console.log('intenta filtrar: lastdate')
-      this.filterData = this.tableData.filter((word: any) => {
+      this.filterData = this.filterData.filter((word: any) => {
         let date = new Date(word.rentDate);
         let selectedDate = new Date(this.lastDate);
         return date <= selectedDate
@@ -138,11 +140,11 @@ export class ReportComponent implements OnInit {
     }
     if (this.statusFilter !== '') {
       console.log('intenta filtrar: estado')
-      this.filterData = this.tableData.filter((word: any) => word.status == this.statusFilter);
+      this.filterData = this.filterData.filter((word: any) => word.status == this.statusFilter);
     }
     if (this.employeeFilter !== '') {
       console.log('intenta filtrar: empleado', this.employeeFilter)
-      this.filterData = this.tableData.filter((word: any) => word.employee.value == this.employeeFilter);
+      this.filterData = this.filterData.filter((word: any) => word.employee.value == this.employeeFilter);
     }
     this.dataSource.data = this.filterData;
 
