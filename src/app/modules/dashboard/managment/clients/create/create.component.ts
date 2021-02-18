@@ -16,6 +16,17 @@ import { CrudActionsService } from '../../shared/services/crud-actions.service';
 })
 export class CreateComponent implements OnInit {
 
+  constructor(
+    private fb: FormBuilder,
+    private crudActions: CrudActionsService,
+    private dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute,
+    private loader: LoaderService,
+    private ao: AlertOptionsService,
+    private location: Location
+  ) { }
+
   form: FormGroup;
   status = status;
   Id = null;
@@ -33,19 +44,9 @@ export class CreateComponent implements OnInit {
         viewValue: 'Jurídica',
       }
     ],
-  }
+  };
 
-  constructor(
-    private fb: FormBuilder,
-    private crudActions: CrudActionsService,
-    private dialog: MatDialog,
-    private router: Router,
-    private route: ActivatedRoute,
-    private loader: LoaderService,
-    private ao: AlertOptionsService,
-    private location: Location
-  ) { }
-
+  validaCedula: boolean;
   ngOnInit(): void {
     this.form = this.fb.group({
       id: this.fb.control(''),
@@ -71,11 +72,12 @@ export class CreateComponent implements OnInit {
         this.form.get('personType').setValue(dataResolver.ClientType);
         this.form.get('status').setValue(dataResolver.Status);
       }
-    })
+    });
   }
 
   postData() {
-    if (!this.form.invalid) {
+    this.documentValidation(this.form.value.noDocument);
+    if (!this.form.invalid && this.documentValidation(this.form.value.noDocument)) {
       this.loader.start();
       let body;
       const json = this.form.getRawValue();
@@ -125,10 +127,17 @@ export class CreateComponent implements OnInit {
           });
       }
     } else {
-      this.dialog.open(AlertDialogComponent, {
-        disableClose: true,
-        data: this.ao.warningDialogWarningConfig
-      });
+      if (!this.documentValidation(this.form.value.noDocument)) {
+        this.dialog.open(AlertDialogComponent, {
+          disableClose: true,
+          data: this.ao.documentDialogWarningConfig
+        });
+      } else {
+        this.dialog.open(AlertDialogComponent, {
+          disableClose: true,
+          data: this.ao.warningDialogWarningConfig
+        });
+      }
     }
   }
 
@@ -141,6 +150,42 @@ export class CreateComponent implements OnInit {
 
     this.router.navigate([`../../clients/consult`], { relativeTo: this.route });
   }
+
+  documentValidation(cedula) {
+    const c = cedula.split('');
+    const v = [1, 2, 1, 2, 1, 2, 1, 2, 1, 2];
+    let result = 0;
+    let ar;
+    let up;
+    let oc;
+    for (let i = 0; i < 10; i++) {
+      up = c[i] * v[i];
+      const ab = up;
+      if (ab >= 10) {
+        oc = ab.toString()
+          .split('')
+          .map(x => parseInt(x))
+          .reduce((x, y) => x + y);
+      } else {
+        oc = ab;
+      }
+      result += parseFloat(oc);
+    }
+    let dp = result;
+    const ac = dp.toString().split('')[0] + '0';
+    const uc = parseInt(ac);
+    const uj = (uc / 10) * 10;
+    if (uj < dp) {
+      dp = (uj + 10) - dp;
+    }
+
+    if (c[10] == dp) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 
   actionError() {
     this.loader.end();
